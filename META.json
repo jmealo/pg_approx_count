@@ -1,0 +1,48 @@
+{
+   "name": "approx_count",
+   "abstract": "Fast row-count estimates with governed ANALYZE refresh and a metrics ledger",
+   "description": "Serves fast row-count estimates from pg_class.reltuples without forcing exact COUNT(*) scans, refreshing stale statistics with a governed, advisory-lock-serialized ANALYZE. Auto-detects read-only transactions and standbys, ships an optional closed-loop tuner, and records a metrics ledger and dashboard.",
+   "version": "1.0.0",
+   "maintainer": [
+      "Jeff Mealo"
+   ],
+   "license": [
+      "postgresql",
+      "mit",
+      "apache_2_0"
+   ],
+   "provides": {
+      "approx_count": {
+         "abstract": "Fast row-count estimates with governed ANALYZE refresh",
+         "file": "sql/approx_count--1.0.sql",
+         "docfile": "README.md",
+         "version": "1.0.0"
+      }
+   },
+   "prereqs": {
+      "runtime": {
+         "requires": {
+            "PostgreSQL": "14.0.0"
+         }
+      },
+      "test": {
+         "recommends": {
+            "pgtap": 0,
+            "plpgsql_check": 0
+         }
+      }
+   },
+   "generated_by": "Jeff Mealo",
+   "meta-spec": {
+      "version": "1.0.0",
+      "url": "https://pgxn.org/meta/spec.txt"
+   },
+   "tags": [
+      "count",
+      "estimate",
+      "reltuples",
+      "statistics",
+      "analyze",
+      "performance"
+   ]
+}

@@ -1,0 +1,20 @@
+# PGXS / build artifacts
+*.so
+*.o
+*.bc
+results/
+regression.diffs
+regression.out
+tmp_check/
+
+# Editor / OS
+*.swp
+.DS_Store
+
+# Personal / website content (not part of the published extension)
+BLOG.md
+dba_review.md
+ecosystem_critique.md
+
+# Local roadmap/working notes (not part of the published extension)
+ROADMAP.md

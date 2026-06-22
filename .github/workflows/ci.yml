@@ -1,0 +1,35 @@
+name: PostgreSQL Matrix
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  render-check:
+    name: install.sql in sync with source
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Regenerate artifacts and verify no drift
+        run: |
+          ./tools/render.sh
+          git add -N approx_count.control install.sql
+          git diff --exit-code -- approx_count.control install.sql
+
+  postgres:
+    name: PostgreSQL ${{ matrix.postgres }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        postgres: ["14", "15", "16", "17", "18", "19"]
+    # PostgreSQL 19 is still in beta; let it run for early signal without
+    # blocking required CI.
+    continue-on-error: ${{ matrix.postgres == '19' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Run Docker test matrix entry
+        run: ./ci/run_postgres_matrix.sh "${{ matrix.postgres }}"

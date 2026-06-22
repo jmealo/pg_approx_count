@@ -1,0 +1,16 @@
+ARG PG_MAJOR=18
+# PG_IMAGE_TAG lets a beta be tested: the image is postgres:19beta1 while the
+# extension packages are still postgresql-19-*. Defaults to PG_MAJOR for GA.
+ARG PG_IMAGE_TAG=${PG_MAJOR}
+FROM postgres:${PG_IMAGE_TAG}
+
+ARG PG_MAJOR=18
+
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        make \
+        "postgresql-${PG_MAJOR}-pgtap" \
+        "postgresql-${PG_MAJOR}-plpgsql-check" \
+        "postgresql-server-dev-${PG_MAJOR}"; \
+    rm -rf /var/lib/apt/lists/*

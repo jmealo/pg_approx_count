@@ -1,0 +1,24 @@
+approx_count_efficiency:
+  query: |
+    SELECT schemaname,
+           tablename,
+           total_calls_served,
+           total_analyzes_executed,
+           EXTRACT(EPOCH FROM total_time_saved)::double precision AS total_time_saved_seconds
+      FROM approx_count.metrics;
+  metrics:
+    - schemaname:
+        usage: "LABEL"
+        description: "PostgreSQL schema containing the relation served by approx_count."
+    - tablename:
+        usage: "LABEL"
+        description: "PostgreSQL relation name served by approx_count."
+    - total_calls_served:
+        usage: "COUNTER"
+        description: "Total calls served by approx_count.approx_count for this relation."
+    - total_analyzes_executed:
+        usage: "COUNTER"
+        description: "Total physical ANALYZE operations executed by approx_count for this relation."
+    - total_time_saved_seconds:
+        usage: "COUNTER"
+        description: "Cumulative estimated COUNT(*) wall-clock time avoided by approx_count, in seconds."

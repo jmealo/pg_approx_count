@@ -1,0 +1,10 @@
+# approx_count extension control template.
+#
+# approx_count.control is GENERATED from this file by tools/render.sh (default
+# schema approx_count). Edit this template, not the generated control. Pinning the
+# schema here means a bare `CREATE EXTENSION approx_count` always installs into
+# that schema (created automatically) and never silently lands in public.
+comment = 'Fast row-count estimates with governed ANALYZE refresh and a metrics ledger'
+default_version = '1.0'
+relocatable = false
+schema = '@PGFC_SCHEMA@'
